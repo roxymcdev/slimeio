@@ -1,0 +1,14 @@
+[versions]
+adventure = "4.26.1"
+indra = "4.1.0"
+jetbrainsAnnotations = "23.0.0"
+jspecify = "1.0.0"
+zstd = "1.5.7-19"
+
+[libraries]
+adventure-nbt = { module = "net.kyori:adventure-nbt", version.ref = "adventure"}
+jetbrains-annotations = { module = "org.jetbrains:annotations", version.ref = "jetbrainsAnnotations" }
+jspecify = { module = "org.jspecify:jspecify", version.ref = "jspecify" }
+zstd = { module = "com.github.luben:zstd-jni", version.ref = "zstd" }
+
+build-indra = { module = "net.kyori:indra-common", version.ref = "indra" }
