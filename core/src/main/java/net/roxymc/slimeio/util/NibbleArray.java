@@ -44,7 +44,7 @@ public record NibbleArray(byte[] data) {
     public String toString() {
         StringJoiner joiner = new StringJoiner(", ", "[", "]");
 
-        for (int i = 0; i < data.length * 2; i++) {
+        for (int i = 0; i < size(); i++) {
             joiner.add(Byte.toString(get(i)));
         }
 
