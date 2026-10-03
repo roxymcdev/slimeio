@@ -4,10 +4,7 @@ import com.github.luben.zstd.ZstdInputStreamNoFinalizer;
 import net.roxymc.slimeio.util.function.IOBiFunction;
 import net.roxymc.slimeio.util.io.LimitedInputStream;
 
-import java.io.DataInputStream;
-import java.io.FilterInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 
 public class SlimeDataInputStream extends DataInputStream implements SlimeDataInput {
     public SlimeDataInputStream(InputStream in) {
@@ -49,7 +46,12 @@ public class SlimeDataInputStream extends DataInputStream implements SlimeDataIn
             };
 
             try (InputStream zstdIn = new ZstdInputStreamNoFinalizer(noCloseIn)) {
-                return readSized(zstdIn, rawLength, reader);
+                T value = readSized(zstdIn, rawLength, reader);
+
+                // if raw bytes were empty, compressed bytes may contain marker data. we should skip it
+                zstdIn.transferTo(OutputStream.nullOutputStream());
+
+                return value;
             }
         });
     }
