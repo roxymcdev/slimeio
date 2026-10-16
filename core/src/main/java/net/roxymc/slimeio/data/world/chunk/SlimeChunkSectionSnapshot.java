@@ -11,8 +11,28 @@ public record SlimeChunkSectionSnapshot<T>(
         SlimeBlockStatesData<T> blockStates,
         SlimeBiomesData<T> biomes
 ) implements SlimeChunkSectionData<T> {
+    public SlimeChunkSectionSnapshot {
+        if (blockLight != null) {
+            blockLight = blockLight.clone();
+        }
+
+        if (skyLight != null) {
+            skyLight = skyLight.clone();
+        }
+    }
+
     public SlimeChunkSectionSnapshot(SlimeChunkSectionData<T> data) {
         this(data.blockLight(), data.skyLight(), data.blockStates(), data.biomes());
+    }
+
+    @Override
+    public @Nullable NibbleArray blockLight() {
+        return blockLight != null ? blockLight.clone() : null;
+    }
+
+    @Override
+    public @Nullable NibbleArray skyLight() {
+        return skyLight != null ? skyLight.clone() : null;
     }
 
     @Override

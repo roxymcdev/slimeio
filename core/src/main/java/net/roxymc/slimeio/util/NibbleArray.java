@@ -40,6 +40,12 @@ public record NibbleArray(byte[] data) {
         return Arrays.equals(this.data, that.data);
     }
 
+    @SuppressWarnings("MethodDoesntCallSuperMethod")
+    @Override
+    public NibbleArray clone() {
+        return new NibbleArray(data.clone());
+    }
+
     @Override
     public String toString() {
         StringJoiner joiner = new StringJoiner(", ", "[", "]");
